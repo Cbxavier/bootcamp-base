@@ -21,12 +21,38 @@ namespace Tarefas.Web.Controllers
         
         public IActionResult Details(int id)
         {
-            var tarefa = listaDeTarefas.Find(tarefa => tarefa.Id == id);
+            var tarefaDAO = new TarefaDAO();
+            var tarefaDTO = tarefaDAO.Consultar(id);
+
+            var tarefa = new Tarefa()
+            {
+                Id = tarefaDTO.Id, 
+                Titulo = tarefaDTO.Titulo,
+                Descricao = tarefaDTO.Descricao,
+                Concluida = tarefaDTO.Concluida
+            };
+
             return View(tarefa);
         }
 
         public IActionResult Index()
-        {            
+        {
+            var tarefaDAO = new TarefaDAO();
+            var listaDeTarefasDTO = tarefaDAO.Consultar();
+
+            var listaDeTarefa = new List<Tarefa>();
+
+            foreach(var tarefaDTO in listaDeTarefasDTO)
+            {
+                listaDeTarefa.Add(new Tarefa()
+                {
+                    Id = tarefaDTO.Id,
+                    Titulo = tarefaDTO.Titulo,
+                    Descricao = tarefaDTO.Descricao,
+                    Concluida = tarefaDTO.Concluida
+                });
+
+            }           
             return View(listaDeTarefas);
         }
 
@@ -48,7 +74,7 @@ namespace Tarefas.Web.Controllers
             var tarefaDAO = new TarefaDAO();
             tarefaDAO.Criar(tarefaDTO);
 
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
