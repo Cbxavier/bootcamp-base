@@ -1,17 +1,21 @@
-@model Tarefas.Web.Models.Tarefa
+@model Tarefas.Web.Models.TarefaViewModel
 
 <form asp-action="Details">
 
     <div class="form-group">
         <label asp-for="Titulo">@Html.DisplayNameFor(model => model.Titulo)</label>
-        <input asp-for="Titulo" class="form-control"/>
+        <input asp-for="Titulo" class="form-control" disabled/>
     </div>
 
     <div class="form-group">
         <label asp-for="Descricao">@Html.DisplayNameFor(model => model.Descricao)</label>
-        <input asp-for="Descricao" class="form-control"/>
+        <input asp-for="Descricao" class="form-control" disabled/>
     </div>
         
-    <input type="submit" class="btn btn-primary" />
+   
+    <a asp-asp-controller="Tarefa" asp-action="Index" asp-route-id="@Model.Id">Voltar</a>
+
+    <input asp-for="Id" hidden/>
+    <input asp-for="Concluida" hidden/>
         
 </form>
