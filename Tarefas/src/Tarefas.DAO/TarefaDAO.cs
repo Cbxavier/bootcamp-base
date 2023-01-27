@@ -67,7 +67,7 @@ namespace Tarefas.DAO
             using(var con = Connection)
             {
                 con.Open();
-                TarefaDTO result = clcon.Query<TarefaDTO>
+                TarefaDTO result = con.Query<TarefaDTO>
                 (
                     @"SELECT Id, Titulo, Descricao, Concluida FROM Tarefa
                     WHERE Id = @Id", new {id}
