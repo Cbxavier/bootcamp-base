@@ -1,6 +1,10 @@
 @model Tarefas.Web.Models.Tarefa
 
-<form asp-action="Details">
+<form asp-action="Update">
+
+    <input asp-for="Id" hidden/>
+    <input asp-for="Concluida" hidden/>
+
 
     <div class="form-group">
         <label asp-for="Titulo">@Html.DisplayNameFor(model => model.Titulo)</label>

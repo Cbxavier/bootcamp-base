@@ -57,7 +57,7 @@ namespace Tarefas.DAO
             {
                 con.Open();
                 var result = con.Query<TarefaDTO>(
-                    @"SELECT * FROM Tarefa"
+                    @"SELECT Id, Titulo, Descricao, Concluida FROM Tarefa"
                 ).ToList();
                 return result;
             }
@@ -67,7 +67,7 @@ namespace Tarefas.DAO
             using(var con = Connection)
             {
                 con.Open();
-                TarefaDTO result = con.Query<TarefaDTO>
+                TarefaDTO result = clcon.Query<TarefaDTO>
                 (
                     @"SELECT Id, Titulo, Descricao, Concluida FROM Tarefa
                     WHERE Id = @Id", new {id}
@@ -76,19 +76,32 @@ namespace Tarefas.DAO
             }
         }
 
-        public void Atualizar(TarefaDAO tarefa)
+        public void Atualizar(TarefaDTO tarefa)
         {
             using(var con = Connection)
             {
                 con.Open();
                 con.Execute        
                 (
-                    @"UPDATE Tarefa SET Titulo = @Tituo, Descricao = @Descricao, Concluida = @Concluida
+                    @"UPDATE Tarefa 
+                    SET Titulo = @Titulo, Descricao = @Descricao, Concluida = @Concluida
                     WHERE Id = @Id", tarefa
                 );
                 
             }
         }
         
+        public void Excluir(int id)
+        {
+            using(var con = Connection)
+            {
+                con.Open();
+                con.Execute        
+                (
+                    @"DELETE FROM Tarefa WHERE Id = @Id", new {id}
+                );
+                
+            }
+        }
     }
 }
