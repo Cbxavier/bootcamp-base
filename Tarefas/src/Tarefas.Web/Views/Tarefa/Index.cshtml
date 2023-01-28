@@ -16,9 +16,9 @@
                 <td>@item.Descricao</td>
                 <td>@item.Concluida</td>
                 <td>
-                    <a asp-controller="Tarefa" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
-                    <a asp-controller="Tarefa" asp-action="Update" asp-route-id="@item.Id">Editar</a>
-                    <a asp-controller="Tarefa" asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                    <button class="btn btn-outline-success"><a asp-controller="Tarefa" asp-action="Details" asp-route-id="@item.Id">Detalhes</a></button>
+                    <button class="btn btn-outline-primary"><a asp-controller="Tarefa" asp-action="Update" asp-route-id="@item.Id">Editar</a></button>
+                    <button class="btn btn-outline-danger"><a asp-controller="Tarefa" asp-action="Delete" asp-route-id="@item.Id">Excluir</a><button>
                 </td>
             </tr>
         }
